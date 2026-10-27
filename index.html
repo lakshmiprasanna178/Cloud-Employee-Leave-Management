@@ -1,0 +1,403 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Leave Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f6fb;
+            color: #263449;
+        }
+
+        header {
+            background: #253b80;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #dce5ff;
+        }
+
+        .profile {
+            background: #ffffff;
+            color: #253b80;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: white;
+            padding: 15px 7%;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px #0000000d;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #526078;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #253b80;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #758096;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 23px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #00000008;
+            border-top: 4px solid #5068d8;
+        }
+
+        .card h3 {
+            color: #778197;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 30px;
+            color: #253b80;
+        }
+
+        .card p {
+            color: #8791a4;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 22px;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #00000008;
+        }
+
+        .panel h2 {
+            font-size: 20px;
+            margin-bottom: 22px;
+        }
+
+        .leave-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #edf0f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .leave-item:last-child {
+            border-bottom: none;
+        }
+
+        .leave-item h4 {
+            margin-bottom: 6px;
+        }
+
+        .leave-item p {
+            color: #8791a4;
+            font-size: 13px;
+        }
+
+        .status {
+            padding: 7px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .approved {
+            color: #16804a;
+            background: #dff8e9;
+        }
+
+        .pending {
+            color: #a56b00;
+            background: #fff0cb;
+        }
+
+        .rejected {
+            color: #c03939;
+            background: #ffe2e2;
+        }
+
+        .leave-balance {
+            margin-bottom: 20px;
+        }
+
+        .balance-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 9px;
+            background: #e9edf5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: #5068d8;
+            border-radius: 10px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: #253b80;
+            color: white;
+            text-decoration: none;
+            padding: 13px 20px;
+            border-radius: 7px;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #3c54a7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #8791a4;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>☁ LeaveCloud</h1>
+            <p>Cloud-Based Employee Leave Management System</p>
+        </div>
+        <div class="profile">👤 Employee Portal</div>
+    </header>
+
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#balance">Leave Balance</a>
+        <a href="#requests">My Requests</a>
+        <a href="#apply">Apply for Leave</a>
+    </nav>
+
+    <main class="container" id="dashboard">
+
+        <section class="welcome">
+            <h2>Welcome Back, Priya! 👋</h2>
+            <p>Manage your leave requests and track your available leave days.</p>
+        </section>
+
+        <section class="cards">
+            <div class="card">
+                <h3>Annual Leave</h3>
+                <h2>12</h2>
+                <p>Days remaining</p>
+            </div>
+
+            <div class="card">
+                <h3>Sick Leave</h3>
+                <h2>08</h2>
+                <p>Days remaining</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending Requests</h3>
+                <h2>02</h2>
+                <p>Awaiting approval</p>
+            </div>
+
+            <div class="card">
+                <h3>Approved Requests</h3>
+                <h2>05</h2>
+                <p>This year</p>
+            </div>
+        </section>
+
+        <section class="content">
+
+            <div class="panel" id="requests">
+                <h2>Recent Leave Requests</h2>
+
+                <div class="leave-item">
+                    <div>
+                        <h4>Personal Leave</h4>
+                        <p>24 Oct 2026 – 25 Oct 2026</p>
+                    </div>
+                    <span class="status approved">Approved</span>
+                </div>
+
+                <div class="leave-item">
+                    <div>
+                        <h4>Annual Leave</h4>
+                        <p>02 Nov 2026 – 04 Nov 2026</p>
+                    </div>
+                    <span class="status pending">Pending</span>
+                </div>
+
+                <div class="leave-item">
+                    <div>
+                        <h4>Sick Leave</h4>
+                        <p>12 Oct 2026 – 12 Oct 2026</p>
+                    </div>
+                    <span class="status approved">Approved</span>
+                </div>
+
+                <div class="leave-item">
+                    <div>
+                        <h4>Annual Leave</h4>
+                        <p>05 Sep 2026 – 06 Sep 2026</p>
+                    </div>
+                    <span class="status rejected">Rejected</span>
+                </div>
+            </div>
+
+            <div class="panel" id="balance">
+                <h2>My Leave Balance</h2>
+
+                <div class="leave-balance">
+                    <div class="balance-info">
+                        <span>Annual Leave</span>
+                        <strong>12 / 20 days</strong>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" style="width: 60%;"></div>
+                    </div>
+                </div>
+
+                <div class="leave-balance">
+                    <div class="balance-info">
+                        <span>Sick Leave</span>
+                        <strong>8 / 12 days</strong>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" style="width: 67%;"></div>
+                    </div>
+                </div>
+
+                <div class="leave-balance">
+                    <div class="balance-info">
+                        <span>Casual Leave</span>
+                        <strong>5 / 10 days</strong>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" style="width: 50%;"></div>
+                    </div>
+                </div>
+
+                <div id="apply">
+                    <a href="#apply" class="apply-btn">+ Apply for Leave</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 LeaveCloud | Cloud-Based Employee Leave Management System</p>
+        <p style="margin-top: 7px;">Access your leave dashboard anytime, anywhere.</p>
+    </footer>
+
+</body>
+</html>
+```
